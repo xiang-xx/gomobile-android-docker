@@ -4,8 +4,8 @@ on:
   push:
     paths-ignore:
       - "**.md"
-    branches:
-      - "main"
+    tags:
+      - "*"
 
 jobs:
   docker:
@@ -16,10 +16,10 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
-          username: makeworld
+          username: xiangxx
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: makeworld/gomobile-android:latest
+          tags: xiangxx/gomobile-android:${{ GITHUB_REF }}
